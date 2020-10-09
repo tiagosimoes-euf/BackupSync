@@ -1,4 +1,4 @@
-# backup-sync
+# BackupSync
 
 This is a prototype of a startup utility to sync backup directories.
 
@@ -9,15 +9,17 @@ This is a prototype of a startup utility to sync backup directories.
 ## Installation
 
     # grab the script
-    git clone https://github.com/tiagosimoes-euf/backup-sync.git
-    # make it executable
-    chmod a+w backup-sync.sh
+    git clone https://github.com/tiagosimoes-euf/BackupSync.git
+    # appreciate the BS in all its glory
+    cd BackupSync/ && ls -hAl
     # copy the example config file
-    cp example.backup-sync.cfg backup-sync.cfg
+    cp example.bs.cfg bs.cfg
     # edit the active config file
-    nano backup-sync.cfg
-    # run the script in the background at login
-    echo $PWD/backup-sync.sh >> ~/.profile
+    nano bs.cfg
+    # make the script executable
+    chmod a+w bs.sh
+    # put it in your $PATH
+    sudo ln -s ${PWD}/bs.sh /usr/local/bin/bs
     # profit!
 
 ## Usage
