@@ -14,7 +14,7 @@ trap 'rm -f ${LOCKFILE}' EXIT
 if [[ ${NOTIFY} ]]; then
   notify-send "Hello ${USER}" \
   "BackupSync is running in the background" \
-  -u normal  -t ${TIMEOUT} -i checkbox-checked-symbolic
+  -u normal -t ${TIMEOUT} -i checkbox-checked-symbolic
 fi
 
 # Catch changes in the parent directory
