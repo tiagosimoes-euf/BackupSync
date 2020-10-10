@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Import configuration
-source backup-sync.cfg
+source $(dirname $(realpath $0))/bs.cfg
 
 if [[ ${NOTIFY} ]]; then
-  notify-send "Hello ${USER}" "backup-sync is running in the background" -u normal  -t ${TIMEOUT} -i checkbox-checked-symbolic
+  notify-send "Hello ${USER}" "BackupSync is running in the background" -u normal  -t ${TIMEOUT} -i checkbox-checked-symbolic
 fi
 
 # Catch changes in the parent directory
@@ -21,7 +21,7 @@ do
         # Sync everything to the destination except for the file with the sync destinations
         rsync -az ${CHANGEPATH} ${DESTPATH} --exclude=${DESTFILE}
         if [[ ${NOTIFY} ]]; then
-          notify-send "backup-sync triggered!" "\nChanged: ${CHANGEPATH}\n\nUpdated: ${DESTPATH}" -u normal -t ${TIMEOUT} -i emblem-synchronizing-symbolic
+          notify-send "BackupSync triggered!" "\nChanged: ${CHANGEPATH}\n\nUpdated: ${DESTPATH}" -u normal -t ${TIMEOUT} -i emblem-synchronizing-symbolic
         fi
       fi
     done
