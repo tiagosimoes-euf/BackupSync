@@ -1,17 +1,16 @@
 #!/usr/bin/env bash
 
-# Make sure only one process runs at a time
-LOCKFILE='/var/tmp/bslock.lock'
-
-exec 200>${LOCKFILE} || exit 1
-flock -n 200 || exit 1
-trap 'rm -f ${LOCKFILE}' EXIT
-
 # Import configuration
 CONFIGFILE='bs.cfg'
 
 source $(dirname $(realpath $0))/${CONFIGFILE}
 
+# Make sure only one process runs at a time
+exec 200>${LOCKFILE} || exit 1
+flock -n 200 || exit 1
+trap 'rm -f ${LOCKFILE}' EXIT
+
+# Startup notification
 if [[ ${NOTIFY} ]]; then
   notify-send "Hello ${USER}" \
   "BackupSync is running in the background" \
