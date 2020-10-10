@@ -32,8 +32,7 @@ This is a prototype of a startup utility to sync backup directories.
 
 ## Usage
 
-    # [Call BS](http://gph.is/PgdFS8)
-    bs
+[Call BS](http://gph.is/PgdFS8) by typing `bs &` so that it runs in the background. 
 
 
 ---
