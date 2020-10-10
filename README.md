@@ -4,36 +4,54 @@ This is a prototype of a startup utility to sync backup directories.
 
 ## Requirements
 
-    sudo apt install inotify-tools rsync
+This script relies on a few tools that may not be immediately available in your system. On Debian/Ubuntu based systems, run the following command to install the necessary dependencies:
+
+    sudo apt install flock inotify-tools rsync
 
 ## Installation
 
-    # grab the script
+First grab the script and appreciate the BS in all its glory!
+
     git clone https://github.com/tiagosimoes-euf/BackupSync.git
-    # appreciate the BS in all its glory
     cd BackupSync/ && ls -hAl
-    # copy the example config file
+
+Copy the example config file and edit the active config file.
+
     cp example.bs.cfg bs.cfg
-    # edit the active config file
     nano bs.cfg
-    # make the script executable
+
+Make the main script and the helper scripts executable.
+
     chmod a+w bs.sh
-    # put it somewhere in your $PATH
+    chmod a+w bschk.sh
+    chmod a+w bsset.sh
+
+Put these somewhere in your `$PATH` for easier access.
+
     sudo ln -s ${PWD}/bs.sh /usr/local/bin/bs
-    # profit!
+    sudo ln -s ${PWD}/bschk.sh /usr/local/bin/bschk
+    sudo ln -s ${PWD}/bsset.sh /usr/local/bin/bsset
+
+Now you can run `bs`, `bschk` or `bsset` from anywhere in the command line.
 
 ## Setup
 
-    # go to your source directory under the parent directory being watched
+To set up a particular sync, go to each source directory under the parent directory being watched and use the `bsset` command to add a destination directory to a destination file.
+
     cd /WATCHDIR/sourcedir
-    # add a destination directory to a destination file
-    echo /destinationdir >> DESTFILE
-    # any changes in the source will trigger a sync to the destination
+    bsset /path/to/destinationdir1
+    bsset /path/to/destinationdir2
+    ...
+
+Now any changes in this source directory will trigger a sync to all the destinations defined.
 
 ## Usage
 
-[Call BS](http://gph.is/PgdFS8) by typing `bs &` so that it runs in the background. 
+[Call BS](http://gph.is/PgdFS8) by typing `bs &` so that it runs in the background.
 
+The main script can be added to the system autostart as well, and also bound to a keyboard shortcut.
+
+To check if the main script is running, use `bschk`. Properly configured, this can be used with tools like the XFCE Generic Monitor plugin for the XFCE panel.
 
 ---
 
