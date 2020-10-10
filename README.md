@@ -18,17 +18,23 @@ This is a prototype of a startup utility to sync backup directories.
     nano bs.cfg
     # make the script executable
     chmod a+w bs.sh
-    # put it in your $PATH
+    # put it somewhere in your $PATH
     sudo ln -s ${PWD}/bs.sh /usr/local/bin/bs
     # profit!
 
-## Usage
+## Setup
 
     # go to your source directory under the parent directory being watched
     cd /WATCHDIR/sourcedir
     # add a destination directory to a destination file
     echo /destinationdir >> DESTFILE
     # any changes in the source will trigger a sync to the destination
+
+## Usage
+
+    # [Call BS](http://gph.is/PgdFS8)
+    bs
+
 
 ---
 
