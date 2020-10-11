@@ -39,11 +39,13 @@ Now you can run `bs`, `bschk` or `bsset` from anywhere in the command line.
 To set up a particular sync, go to each source directory under the parent directory being watched and use the `bsset` command to add a destination directory to a destination file.
 
     cd /WATCHDIR/sourcedir
-    bsset /path/to/destinationdir1
-    bsset /path/to/destinationdir2
+    bsset -d /path/to/destinationdir1
+    bsset -d /path/to/destinationdir2
     ...
 
 Now any changes in this source directory will trigger a sync to all the destinations defined.
+
+Use `bsset -l` to list all the destinations in the file and `bsset -e` to edit the file manually.
 
 ## Usage
 
