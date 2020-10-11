@@ -1,2 +1,8 @@
 # Ignore local configuration
 bs.cfg
+
+# Ignore rsync include
+.rsync.include
+
+# Ignore logs
+.log
