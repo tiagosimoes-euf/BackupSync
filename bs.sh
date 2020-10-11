@@ -18,7 +18,8 @@ if [[ ${NOTIFY} ]]; then
 fi
 
 # Catch changes in the parent directory
-inotifywait -m -r -q --format '%w' -e close_write ${WATCHDIR} | \
+inotifywait -m -r -q --exclude ${DESTFILE} \
+--format '%w' -e close_write ${WATCHDIR} | \
 while read CHANGEPATH
 do
   # Check for a file with sync destinations
@@ -33,7 +34,7 @@ do
         rsync -az ${CHANGEPATH} ${DESTPATH} --exclude=${DESTFILE}
         if [[ ${NOTIFY} ]]; then
           notify-send "BackupSync triggered!" \
-          "\nChanged: ${CHANGEPATH}\n\nUpdated: ${DESTPATH}" \
+          "Changed: ${CHANGEPATH}\nUpdated: ${DESTPATH}" \
           -u normal -t ${TIMEOUT} -i emblem-synchronizing-symbolic
         fi
       fi
