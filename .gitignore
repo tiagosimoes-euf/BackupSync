@@ -5,4 +5,4 @@ bs.cfg
 .rsync.include
 
 # Ignore logs
-.log
+*.log
