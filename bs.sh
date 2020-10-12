@@ -67,29 +67,29 @@ do
         OUTPUT=( $(rsync -az ${CHANGEPATH} ${DESTPATH} --exclude=${DESTFILE} \
         --include-from=${INCLUDE} --exclude='*' \
         --info=name1) )
-        echo ${#OUTPUT[@]}
         echo "[$(date +"%H_%M_%S")] Updated: ${DESTPATH}" >> ${LOGFILE}
+
+        # Check the output from rsync for changes other than the docroot
+        SYNCED=(${OUTPUT[@]:1})
+        NOTIFYSTR=""
+        if [[ ${SYNCED} ]]; then
+          NOTIFYSTR+="Changed: ${CHANGEPATH}\n"
+          echo -e "[Transfer]" >> ${LOGFILE}
+          for file in "${SYNCED[@]}"
+          do
+            echo ${file} >> ${LOGFILE}
+            NOTIFYSTR+="${file}\n"
+          done
+          NOTIFYSTR+="Updated: ${DESTPATH}"
+        fi
+
+        # Check if there is anything to report
+        if [[ ${NOTIFY} ]] && [[ ${NOTIFYSTR} ]]; then
+          notify-send "BackupSync triggered!" \
+          "${NOTIFYSTR}" \
+          -u normal -t ${TIMEOUT} -i emblem-synchronizing-symbolic
+        fi
       fi
     done
-
-    # Check the output from rsync for changes other than the docroot
-    SYNCED=(${OUTPUT[@]:1})
-    echo ${#SYNCED[@]}
-    NOTIFYSTR=""
-    if [[ ${SYNCED} ]]; then
-      echo -e "[File list]" >> ${LOGFILE}
-      for file in "${SYNCED[@]}"
-      do
-        echo ${file} >> ${LOGFILE}
-        NOTIFYSTR+="${file}\n"
-      done
-    fi
-
-    # Check if there is anything to report
-    if [[ ${NOTIFY} ]] && [[ ${NOTIFYSTR} ]]; then
-      notify-send "BackupSync triggered!" \
-      "${NOTIFYSTR}" \
-      -u normal -t ${TIMEOUT} -i emblem-synchronizing-symbolic
-    fi
   fi
 done
