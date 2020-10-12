@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
 
-# Import configuration
+# Set the main variables
+SCRIPTPATH=$(dirname $(realpath $0))
+CONFIGEXAMPLE='example.bs.cfg'
 CONFIGFILE='bs.cfg'
 
-source $(dirname $(realpath $0))/${CONFIGFILE}
+# Assert a configuration file
+if [[ ! -f ${SCRIPTPATH}/${CONFIGFILE} ]]; then
+  cp ${SCRIPTPATH}/${CONFIGEXAMPLE} ${SCRIPTPATH}/${CONFIGFILE}
+fi
+
+# Import configuration
+source ${SCRIPTPATH}/${CONFIGFILE}
 
 # If no file is present, initialize it
 if [[ ! -f ${PWD}/${DESTFILE} ]]; then

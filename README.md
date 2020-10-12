@@ -51,9 +51,19 @@ Use `bsset -l` to list all the destinations in the file and `bsset -e` to edit t
 
 [Call BS](http://gph.is/PgdFS8) by typing `bs &` so that it runs in the background.
 
-The main script can be added to the system autostart as well, and also bound to a keyboard shortcut.
+### Check the status
 
-To check if the main script is running, use `bschk`. Properly configured, this can be used with tools like the XFCE Generic Monitor plugin for the XFCE panel.
+To check if the main script is running, use `bschk`. The check script will display a message according with the configuration file, but this can be overridden by passing a flag to the command:
+
+    bschk -m DEFAULT    # echoes in the command line
+    bschk -m NOTIFY     # displays a system notification
+    bschk -m GENMON     # outputs XML for the XFCE Panel Generic Monitor
+
+### Toggle On/Off
+
+Use `bschk -t` to toggle BackupSync *on* and *off*! If the script is running, this command will kill the child processes and switch it off. If the script is not running, it will start it running in the background.
+
+You can combine it with another flag like `bschk -t -m NOTIFY` and bind it to a keyboard shortcut for bonus points!
 
 ---
 

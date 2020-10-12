@@ -27,6 +27,7 @@ fi
 
 # Make sure only one process runs at a time
 exec 200>${LOCKFILE} || exit 1
+echo $$ > ${LOCKFILE}
 flock -n 200 || exit 1
 trap 'rm -f ${LOCKFILE}' EXIT
 
