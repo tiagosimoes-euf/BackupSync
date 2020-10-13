@@ -68,6 +68,7 @@ case ${BSCHKMOD} in
   'GENMON' )
     echo "<txt> BS: ${STATUS} </txt>"
     echo -e "<tool>${MESSAGE}\n${DETAILS}</tool>"
+    echo "<txtclick>bschk -t -m NOTIFY</txtclick>"
     ;;
   * )
     echo -e ${MESSAGE}
