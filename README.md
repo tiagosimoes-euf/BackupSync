@@ -47,6 +47,10 @@ Now any changes in this source directory will trigger a sync to all the destinat
 
 Use `bsset -l` to list all the destinations in the file and `bsset -e` to edit the file manually.
 
+### Configuring rsync filters
+
+The approach to `rsync` is to **exclude all** but the patterns defined in the `.rsync.include` file at the project root. It is possible to define different rules for each source directory by running `bsset -r` which will copy the example file to that directory and open it in the text predefined text editor. Due to the way `rsync` works, this file will be ignored when syncing.
+
 ## Usage
 
 [Call BS](http://gph.is/PgdFS8) by typing `bs &` so that it runs in the background.

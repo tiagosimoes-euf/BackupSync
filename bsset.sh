@@ -4,6 +4,7 @@
 SCRIPTPATH=$(dirname $(realpath $0))
 CONFIGEXAMPLE='example.bs.cfg'
 CONFIGFILE='bs.cfg'
+INCLUDEEXAMPLE='example.rsync.include'
 
 # Assert a configuration file
 if [[ ! -f ${SCRIPTPATH}/${CONFIGFILE} ]]; then
@@ -15,11 +16,11 @@ source ${SCRIPTPATH}/${CONFIGFILE}
 
 # If no file is present, initialize it
 if [[ ! -f ${PWD}/${DESTFILE} ]]; then
-  echo "[BackupSync]" > ${DESTFILE}
+  echo "[BackupSync]" > ${PWD}/${DESTFILE}
 fi
 
 # Get options
-while getopts ":d:le" opt; do
+while getopts ":d:elr" opt; do
 case ${opt} in
   d )
     # Check if it is an actual directory
@@ -38,9 +39,13 @@ case ${opt} in
       done
       if [[ ${HITS} == 0 ]]; then
         echo -e "Adding destination to the list:\n$(realpath ${OPTARG})"
-        echo $(realpath ${OPTARG}) >> ${DESTFILE}
+        echo $(realpath ${OPTARG}) >> ${PWD}/${DESTFILE}
       fi
     fi
+    ;;
+  e )
+    # Open the file in the defined text editor
+    ${EDITOR} ${PWD}/${DESTFILE}
     ;;
   l )
     echo -e "Set to sync to the following destination directories:"
@@ -53,9 +58,12 @@ case ${opt} in
       fi
     done
     ;;
-  e )
-    # Open the file in the defined text editor
-    ${EDITOR} ${DESTFILE}
+  r )
+    # Assert an include file for rsync and open it in the text editor
+    if [[ ! -f ${PWD}/${INCLUDEFILE} ]]; then
+      cp ${SCRIPTPATH}/${INCLUDEEXAMPLE} ${PWD}/${INCLUDEFILE}
+    fi
+    ${EDITOR} ${PWD}/${INCLUDEFILE}
     ;;
   * )
     # Best. Handling. Ever.
