@@ -69,6 +69,15 @@ Use `bschk -t` to toggle BackupSync *on* and *off*! If the script is running, th
 
 You can combine it with another flag like `bschk -t -m NOTIFY` and bind it to a keyboard shortcut for bonus points!
 
+## Known issues
+
+Sometimes this error may prevent the script from starting:
+
+    Failed to watch /home/ts/dev/00_BACKUP; upper limit on inotify watches reached!
+    Please increase the amount of inotify watches allowed per user via `/proc/sys/fs/inotify/max_user_watches'.
+
+Refer to [this StackOverflow answer](https://stackoverflow.com/a/53078114) for details on how to solve it.
+
 ---
 
 Under active development...
