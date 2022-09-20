@@ -80,4 +80,4 @@ Refer to [this StackOverflow answer](https://stackoverflow.com/a/53078114) for d
 
 ---
 
-Under active development...
+_in memoriam_ Tiago Seco (1984 - 2022)
